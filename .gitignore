@@ -1,0 +1,12 @@
+# Dev / éditeur
+/.claude/
+.DS_Store
+Thumbs.db
+
+# Fichiers sources (non nécessaires sur le site publié)
+/IMG_3030.PNG
+/IMG_3031.PNG
+/santi.png
+/Alhurra.ttf
+/iconic-ecsel-banner-639x423.png
+/iconic-ecsel-banner-639x423@2x.png
