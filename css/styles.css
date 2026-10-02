@@ -400,6 +400,8 @@ ul, ol { list-style: none; padding: 0; }
 .success__text { color: var(--ink-2); max-width: 46ch; margin: 14px auto 0; }
 .success__sub { margin-top: 10px; font-family: var(--font-display); font-weight: 700; color: var(--c-violet); letter-spacing: .02em; }
 .success .btn { margin-top: 26px; }
+.success__actions { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 26px; }
+.success__actions .btn { margin-top: 0; min-width: 240px; }
 
 /* ============================ CTA FINALE ============================ */
 .final { position: relative; background: var(--grad-hero); color: #fff; text-align: center; padding-block: clamp(70px, 10vw, 130px); overflow: hidden; }

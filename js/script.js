@@ -286,11 +286,15 @@
     };
   }
 
-  function submitLead(d) {
-    var cfg = window.ICONIC_LEAD_CONFIG || {};
-    var summary = buildSummary(d);
+  function waLink(cfg, summary) {
+    var num = (cfg.whatsappNumber || "").toString().replace(/[^\d]/g, "");
+    if (!num || cfg.sendWhatsApp === false) return "";
+    return "https://wa.me/" + num + "?text=" + encodeURIComponent(summary);
+  }
 
-    // 1) Web3Forms (recommandé)
+  // Canal e-mail (automatique) — renvoie une promesse résolue quand l'e-mail est parti.
+  function sendEmail(cfg, d, summary) {
+    // 1) Web3Forms (e-mail automatique et silencieux — recommandé)
     if (cfg.web3formsKey) {
       var payload = Object.assign({
         access_key: cfg.web3formsKey,
@@ -303,45 +307,27 @@
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(payload)
-      }).then(function (r) {
-        if (r.ok) return { ok: true };
-        throw new Error("web3forms");
-      }).catch(function () { return fallback(cfg, d, summary); });
+      }).then(function (r) { if (r.ok) return { ok: true }; throw new Error("web3forms"); });
     }
-
-    // 2) Webhook JSON
+    // 2) Webhook JSON (Make / Zapier / n8n…)
     if (cfg.webhookUrl) {
       return fetch(cfg.webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ source: "ICONIC × ECSEL Landing", submittedAt: new Date().toISOString(), lead: d })
-      }).then(function (r) {
-        if (r.ok) return { ok: true };
-        throw new Error("webhook");
-      }).catch(function () { return fallback(cfg, d, summary); });
+      }).then(function (r) { if (r.ok) return { ok: true }; throw new Error("webhook"); });
     }
-
-    // 3/4) Canaux directs
-    return Promise.resolve(fallback(cfg, d, summary));
-  }
-
-  function fallback(cfg, d, summary) {
-    if (cfg.whatsappNumber) {
-      var num = String(cfg.whatsappNumber).replace(/[^\d]/g, "");
-      window.open("https://wa.me/" + num + "?text=" + encodeURIComponent(summary), "_blank");
-      return { ok: true, channel: "whatsapp" };
-    }
+    // 3) Fallback : client mail du visiteur (mailto)
     if (cfg.contactEmail) {
       var subject = "Nouveau lead ICONIC × ECSEL — " + (d.company || d.fullname);
       window.location.href = "mailto:" + cfg.contactEmail +
         "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(summary);
-      return { ok: true, channel: "email" };
+      return Promise.resolve({ ok: true, channel: "email" });
     }
-    // Aucune méthode configurée : ne pas perdre le lead
-    console.warn("[ICONIC] Aucune méthode de réception n'est configurée dans js/config.js. " +
-                 "Renseignez web3formsKey, webhookUrl, whatsappNumber ou contactEmail.");
+    // 4) Rien de configuré : ne pas perdre le lead (console)
+    console.warn("[ICONIC] Aucun canal e-mail configuré dans js/config.js (web3formsKey / webhookUrl / contactEmail).");
     console.info("[ICONIC] Lead reçu :\n" + summary);
-    return { ok: true, channel: "none" };
+    return Promise.resolve({ ok: true, channel: "none" });
   }
 
   /* ------------------------- Soumission ------------------------- */
@@ -356,32 +342,48 @@
     box.textContent = msg;
   }
 
+  function showSuccess(data, waUrl) {
+    lastFirstName = data.fullname.split(" ")[0] || "";
+    renderSuccessTitle();
+    var waBtn = $("[data-success-wa]");
+    if (waBtn) {
+      if (waUrl) { waBtn.href = waUrl; waBtn.hidden = false; }
+      else { waBtn.hidden = true; }
+    }
+    form.hidden = true;
+    var prog = $(".progress"); if (prog) prog.hidden = true;
+    if (countEl) countEl.hidden = true;
+    successEl.hidden = false;
+    scrollToCard();
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!validateStep(totalSteps)) return;
 
     var data = collect();
+    var cfg = window.ICONIC_LEAD_CONFIG || {};
+    var summary = buildSummary(data);
+    var waUrl = waLink(cfg, summary);
+    var hasSilentEmail = !!(cfg.web3formsKey || cfg.webhookUrl);
+
+    // WhatsApp : ouvrir dans le geste utilisateur (évite le blocage du popup).
+    // Ouverture auto seulement si l'e-mail est silencieux, sinon mailto + WhatsApp
+    // ouvriraient deux applications en même temps (le bouton de succès gère ce cas).
+    if (waUrl && hasSilentEmail) window.open(waUrl, "_blank");
+
     submitBtn.classList.add("is-loading");
     submitBtn.disabled = true;
 
-    Promise.resolve(submitLead(data)).then(function (res) {
+    sendEmail(cfg, data, summary).then(function () {
       submitBtn.classList.remove("is-loading");
       submitBtn.disabled = false;
-      if (res && res.ok) {
-        lastFirstName = data.fullname.split(" ")[0] || "";
-        renderSuccessTitle();
-        form.hidden = true;
-        var prog = $(".progress"); if (prog) prog.hidden = true;
-        if (countEl) countEl.hidden = true;
-        successEl.hidden = false;
-        scrollToCard();
-      } else {
-        showGeneralError(tr("err.general", "Une erreur est survenue. Merci de réessayer."));
-      }
+      showSuccess(data, waUrl);
     }).catch(function () {
       submitBtn.classList.remove("is-loading");
       submitBtn.disabled = false;
-      showGeneralError(tr("err.network", "Impossible d'envoyer pour le moment. Vérifiez votre connexion et réessayez."));
+      if (waUrl) showSuccess(data, waUrl);
+      else showGeneralError(tr("err.network", "Impossible d'envoyer pour le moment. Vérifiez votre connexion et réessayez."));
     });
   });
 

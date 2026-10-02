@@ -134,11 +134,12 @@
       "success.text": "Votre demande a bien été envoyée. L’équipe ICONIC étudie vos besoins et vous recontacte très prochainement pour construire votre offre média personnalisée.",
       "success.sub": "Sans engagement · #Weareiconic",
       "success.home": "Retour en haut",
+      "success.wa": "Envoyer aussi sur WhatsApp",
 
       "final.text": "Votre présence à ECSEL Expo ne s’arrête pas à votre stand. Transformez-la en contenu, visibilité et opportunités avec ICONIC.",
       "final.cta": "Parler à l’équipe ICONIC",
 
-      "footer.tag": "Partenaire média officiel de ECSEL Expo Algiers 2026.<br>Nous façonnons l’avenir des médias numériques.",
+      "footer.tag": "Partenaire média officiel d’ECSEL Expo Algiers 2026.<br>Nous façonnons l’avenir des médias numériques.",
       "footer.rights": "Tous droits réservés."
     },
 
@@ -152,7 +153,7 @@
 
       "hero.partnerSub": "الشريك الإعلامي الرسمي",
       "skip": "انتقل إلى النموذج",
-      "hero.lead": "هل تعرض في ECSEL Expo 2026؟ حوّل حضورك في المعرض إلى فرصة حقيقية لـ<strong>الظهور</strong> و<strong>المحتوى</strong> و<strong>الأعمال</strong>.",
+      "hero.lead": "هل تعرض في ECSEL Expo 2026؟ حوّل حضورك في المعرض إلى فرصة حقيقية لتحقيق <strong>الظهور</strong> و<strong>المحتوى</strong> و<strong>فرص الأعمال</strong>.",
       "hero.sub": "تصمّم ICONIC لعلامتك عرضًا إعلاميًا مخصّصًا يناسب أهدافك ونشاطك وحضورك في ECSEL Expo.",
       "hero.cta1": "اطلب عرضك المخصّص",
       "hero.cta2": "اكتشف كيف نعمل",
@@ -261,15 +262,16 @@
       "err.general": "حدث خطأ. يرجى المحاولة مرة أخرى.",
       "err.network": "تعذّر الإرسال حاليًا. تحقّق من اتصالك وأعد المحاولة.",
 
-      "success.title": "شكرًا {name} !",
+      "success.title": "شكرًا {name}!",
       "success.text": "تمّ إرسال طلبك بنجاح. يدرس فريق ICONIC احتياجاتك وسيتواصل معك قريبًا جدًا لبناء عرضك الإعلامي المخصّص.",
       "success.sub": "دون التزام · #Weareiconic",
       "success.home": "العودة إلى الأعلى",
+      "success.wa": "أرسِل أيضًا عبر واتساب",
 
       "final.text": "حضورك في ECSEL Expo لا يتوقّف عند جناحك. حوّله إلى محتوى وظهور وفرص مع ICONIC.",
       "final.cta": "تحدّث مع فريق ICONIC",
 
-      "footer.tag": "الشريك الإعلامي الرسمي لـ ECSEL Expo Algiers 2026.<br>نحن نحدّد مستقبل الإعلام الرقمي.",
+      "footer.tag": "الشريك الإعلامي الرسمي لمعرض ECSEL Expo Algiers 2026.<br>نحن نحدّد مستقبل الإعلام الرقمي.",
       "footer.rights": "جميع الحقوق محفوظة."
     },
 
@@ -396,6 +398,7 @@
       "success.text": "Your request has been sent. The ICONIC team is reviewing your needs and will get back to you very soon to build your personalized media offer.",
       "success.sub": "No commitment · #Weareiconic",
       "success.home": "Back to top",
+      "success.wa": "Also send on WhatsApp",
 
       "final.text": "Your presence at ECSEL Expo doesn’t stop at your stand. Turn it into content, visibility and opportunities with ICONIC.",
       "final.cta": "Talk to the ICONIC team",
