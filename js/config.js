@@ -18,7 +18,7 @@ window.ICONIC_LEAD_CONFIG = {
   // ✅ الأسهل بدون برمجة: Web3Forms
   //    1) ادخل https://web3forms.com وأدخل بريد ICONIC → احصل على Access Key مجاني.
   //    2) الصق المفتاح هنا. تصل كل الطلبات تلقائيًا إلى بريد ICONIC.
-  web3formsKey: "",                 // مثال: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  web3formsKey: "9267b9f1-7005-4515-ad7d-b130827b5d3f",
 
   // أو: Webhook مخصّص (Make / Zapier / n8n / Google Sheets) يستقبل JSON:
   webhookUrl: "",
@@ -34,7 +34,7 @@ window.ICONIC_LEAD_CONFIG = {
 
   // رقم واتساب ICONIC بالصيغة الدولية بدون "+"  — مثال الجزائر: "2135XXXXXXXX"
   // عند ضبطه: تُفتح رسالة واتساب مكتوبة بكل إجابات العميل ليرسلها إلى ICONIC.
-  whatsappNumber: "",
+  whatsappNumber: "213782563883",   // +213 782 56 38 83
   sendWhatsApp: true,               // true = تفعيل قناة واتساب
 
   /* ============== عام ============== */
