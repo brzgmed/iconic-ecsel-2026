@@ -80,7 +80,7 @@
 
       "s1.legend": "Votre entreprise",
       "s1.hint": "Les champs marqués d’un <span class=\"req\">*</span> sont obligatoires.",
-      "f.fullname": "Nom &amp; prénom",
+      "f.fullname": "Nom & prénom",
       "f.company": "Entreprise / Marque",
       "f.activite": "Votre activité",
       "meta.multi": "Plusieurs réponses possibles",

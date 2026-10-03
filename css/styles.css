@@ -276,6 +276,11 @@ ul, ol { list-style: none; padding: 0; }
 .valeur__note { margin-top: 16px; font-weight: 600; color: var(--ink); }
 .valeur__body .link-arrow { margin-top: 24px; }
 
+/* ============================ WE ARE ICONIC (image band) ============================ */
+.brandband { background: var(--paper-2); padding-block: clamp(30px, 5vw, 64px); }
+.brandband__frame { max-width: 1140px; margin-inline: auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); line-height: 0; }
+.brandband__frame img { width: 100%; height: auto; display: block; }
+
 /* ============================ 02 — FORMATS ============================ */
 .formats { background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
 .formats__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(14px, 1.8vw, 22px); }
